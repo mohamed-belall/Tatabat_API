@@ -5,6 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Talabat.Core.Entities;
+using Talabat.Repository.Data.Config;
+
+
+
+// to use this modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());  
+using System.Reflection;
 
 namespace Talabat.Repository.Data
 {
@@ -21,6 +27,16 @@ namespace Talabat.Repository.Data
             // but in DbContext we don't have 
             //base.OnModelCreating(modelBuilder);
 
+            #region old fashion
+            //modelBuilder.ApplyConfiguration(new ProductConfigurations());
+            //modelBuilder.ApplyConfiguration(new ProductBrandConfiguration());
+            //modelBuilder.ApplyConfiguration(new ProductCategoryConfiguration());
+            #endregion
+
+            #region new (using assemply)
+            // apply configuration from all IEntityTypeConfiguration
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());  
+            #endregion
 
 
         }

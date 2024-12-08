@@ -1,38 +1,99 @@
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Talabat.Core.Entities;
+using Talabat.Core.Repositories.Contract;
+using Talabat.Repository;
 using Talabat.Repository.Data;
 
 namespace Talabat.API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
 
 
-            #region
+            //StoreContext updatedatabase = new StoreContext();
+            //updatedatabase.Database.MigrateAsync();
+
+            var webApplicationBuilder = WebApplication.CreateBuilder(args);
+
+
+            #region Configure_Service
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            webApplicationBuilder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            webApplicationBuilder.Services.AddEndpointsApiExplorer();
+            webApplicationBuilder.Services.AddSwaggerGen();
 
 
-            builder.Services.AddDbContext<StoreContext>(options =>
+            webApplicationBuilder.Services.AddDbContext<StoreContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(webApplicationBuilder.Configuration.GetConnectionString("DefaultConnection"));
             });
+
+
+
+            #region allow_dependancyInjection_for_repository
+            //webApplicationBuilder.Services.AddScoped<IGenericRepository<Product>, GenericRepository<Product>>();
+            //webApplicationBuilder.Services.AddScoped<IGenericRepository<ProductCategory>, GenericRepository<ProductCategory>>();
+            //webApplicationBuilder.Services.AddScoped<IGenericRepository<ProductBrand>, GenericRepository<ProductBrand>>(); 
+
+            // generic 
+            webApplicationBuilder.Services.AddScoped(typeof(IGenericRepository<>) , typeof(GenericRepository<>));
+           
+            #endregion
 
 
 
             #endregion
 
 
-            var app = builder.Build();
+            var app = webApplicationBuilder.Build();
+
+
+            #region Ask CLR for creating Object from DbContext Explicitly
+            // ask CLR for creating Object from DbContext Explicitly
+
+            using var scope = app.Services.CreateScope();
+          
+            var services = scope.ServiceProvider;
+            var _dbContext = services.GetRequiredService<StoreContext>();
+
+            var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+            try
+            {
+
+                await _dbContext.Database.MigrateAsync(); // for automatically update database
+
+                await StoreContextSeed.SeedAsync(_dbContext); // for seeding entered data
+            }
+            catch (Exception ex)
+            {
+                var logger = loggerFactory.CreateLogger<Program>();
+                logger.LogError(ex, "an error has been occurred during apply the Migration");
+                
+            }
+
+
+
+            // this is another way to dispose scope or using ( using ) 
+            //var scope = app.Services.CreateScope();
+            //try
+            //{
+
+            //    var services = scope.ServiceProvider;
+            //    var _dbContext = services.GetRequiredService<DbContext>();
+
+            //    await _dbContext.Database.MigrateAsync();
+
+            //}
+            //finally { scope.Dispose(); }
+
+            #endregion
 
 
             #region Configure Kestrel MiddleWare
@@ -52,6 +113,8 @@ namespace Talabat.API
 
 
             #endregion
+
+
             app.Run();
         }
     }

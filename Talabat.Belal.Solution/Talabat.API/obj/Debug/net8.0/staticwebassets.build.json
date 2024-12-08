@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "UOdhDFyB8tvESKSvCMZH+PkqOHSlWabm9Bv8BK46PO8=",
+  "Source": "Talabat.API",
+  "BasePath": "_content/Talabat.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
