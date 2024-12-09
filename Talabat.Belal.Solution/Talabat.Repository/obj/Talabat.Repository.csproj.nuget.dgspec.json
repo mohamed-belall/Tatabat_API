@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\01_DotNET\\projects\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Repository\\Talabat.Repository.csproj": {}
+    "D:\\01_DotNET\\Route\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Repository\\Talabat.Repository.csproj": {}
   },
   "projects": {
-    "D:\\01_DotNET\\projects\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Core\\Talabat.Core.csproj": {
+    "D:\\01_DotNET\\Route\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Core\\Talabat.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\01_DotNET\\projects\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Core\\Talabat.Core.csproj",
+        "projectUniqueName": "D:\\01_DotNET\\Route\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Core\\Talabat.Core.csproj",
         "projectName": "Talabat.Core",
-        "projectPath": "D:\\01_DotNET\\projects\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Core\\Talabat.Core.csproj",
+        "projectPath": "D:\\01_DotNET\\Route\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Core\\Talabat.Core.csproj",
         "packagesPath": "C:\\Users\\moham\\.nuget\\packages\\",
-        "outputPath": "D:\\01_DotNET\\projects\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Core\\obj\\",
+        "outputPath": "D:\\01_DotNET\\Route\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -69,14 +69,14 @@
         }
       }
     },
-    "D:\\01_DotNET\\projects\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Repository\\Talabat.Repository.csproj": {
+    "D:\\01_DotNET\\Route\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Repository\\Talabat.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\01_DotNET\\projects\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Repository\\Talabat.Repository.csproj",
+        "projectUniqueName": "D:\\01_DotNET\\Route\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Repository\\Talabat.Repository.csproj",
         "projectName": "Talabat.Repository",
-        "projectPath": "D:\\01_DotNET\\projects\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Repository\\Talabat.Repository.csproj",
+        "projectPath": "D:\\01_DotNET\\Route\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Repository\\Talabat.Repository.csproj",
         "packagesPath": "C:\\Users\\moham\\.nuget\\packages\\",
-        "outputPath": "D:\\01_DotNET\\projects\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Repository\\obj\\",
+        "outputPath": "D:\\01_DotNET\\Route\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -97,8 +97,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\01_DotNET\\projects\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Core\\Talabat.Core.csproj": {
-                "projectPath": "D:\\01_DotNET\\projects\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Core\\Talabat.Core.csproj"
+              "D:\\01_DotNET\\Route\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Core\\Talabat.Core.csproj": {
+                "projectPath": "D:\\01_DotNET\\Route\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Core\\Talabat.Core.csproj"
               }
             }
           }

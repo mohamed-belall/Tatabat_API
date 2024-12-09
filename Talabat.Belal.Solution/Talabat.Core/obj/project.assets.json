@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\01_DotNET\\projects\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Core\\Talabat.Core.csproj",
+      "projectUniqueName": "D:\\01_DotNET\\Route\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Core\\Talabat.Core.csproj",
       "projectName": "Talabat.Core",
-      "projectPath": "D:\\01_DotNET\\projects\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Core\\Talabat.Core.csproj",
+      "projectPath": "D:\\01_DotNET\\Route\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Core\\Talabat.Core.csproj",
       "packagesPath": "C:\\Users\\moham\\.nuget\\packages\\",
-      "outputPath": "D:\\01_DotNET\\projects\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Core\\obj\\",
+      "outputPath": "D:\\01_DotNET\\Route\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

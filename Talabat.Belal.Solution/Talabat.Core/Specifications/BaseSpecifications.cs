@@ -8,7 +8,7 @@ using Talabat.Core.Entities;
 
 namespace Talabat.Core.Specifications
 {
-    internal class BaseSpecifications<T> : ISpecifications<T> where T : BaseEntity
+    public class BaseSpecifications<T> : ISpecifications<T> where T : BaseEntity
     {
         // automatic property compiler will generate automatic backing field (hidden parameter)
         // in background  field for get and field for set
