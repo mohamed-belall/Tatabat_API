@@ -54,8 +54,7 @@
               "RelativeToolTip": "Talabat.API\\Program.cs",
               "ViewState": "AgIAABcAAAAAAAAAAAAAACMAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-08T11:34:42.952Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-08T11:34:42.952Z"
             },
             {
               "$type": "Document",
@@ -67,8 +66,7 @@
               "RelativeToolTip": "Talabat.API\\Controllers\\BaseApiController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAADwvwcAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-08T11:30:44.929Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-08T11:30:44.929Z"
             },
             {
               "$type": "Document",
@@ -80,8 +78,7 @@
               "RelativeToolTip": "Talabat.API\\Controllers\\ProductsController.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAmwA8AAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-08T11:30:25.608Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-08T11:30:25.608Z"
             },
             {
               "$type": "Document",
@@ -91,7 +88,7 @@
               "RelativeDocumentMoniker": "Talabat.Repository\\GenericRepository.cs",
               "ToolTip": "D:\\01_DotNET\\projects\\Tatabat_API\\Talabat.Belal.Solution\\Talabat.Repository\\GenericRepository.cs",
               "RelativeToolTip": "Talabat.Repository\\GenericRepository.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAAABkAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-08T11:18:41.985Z",
               "EditorCaption": ""
@@ -106,8 +103,7 @@
               "RelativeToolTip": "Talabat.Core\\Repositories.Contract\\IGenericRepository.cs",
               "ViewState": "AgIAAAEAAAAAAAAAAAAiwA0AAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-08T11:16:52.418Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-08T11:16:52.418Z"
             },
             {
               "$type": "Document",
@@ -119,8 +115,7 @@
               "RelativeToolTip": "Talabat.Repository\\Data\\StoreContextSeed.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-08T11:07:11.696Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-08T11:07:11.696Z"
             }
           ]
         }
