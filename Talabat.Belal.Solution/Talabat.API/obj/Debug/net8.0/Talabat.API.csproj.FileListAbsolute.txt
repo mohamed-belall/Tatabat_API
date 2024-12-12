@@ -352,3 +352,5 @@ D:\01_DotNET\Route\Tatabat_API\Talabat.Belal.Solution\Talabat.API\obj\Debug\net8
 D:\01_DotNET\Route\Tatabat_API\Talabat.Belal.Solution\Talabat.API\obj\Debug\net8.0\Talabat.API.pdb
 D:\01_DotNET\Route\Tatabat_API\Talabat.Belal.Solution\Talabat.API\obj\Debug\net8.0\Talabat.API.genruntimeconfig.cache
 D:\01_DotNET\Route\Tatabat_API\Talabat.Belal.Solution\Talabat.API\obj\Debug\net8.0\ref\Talabat.API.dll
+D:\01_DotNET\Route\Tatabat_API\Talabat.Belal.Solution\Talabat.API\bin\Debug\net8.0\AutoMapper.dll
+D:\01_DotNET\Route\Tatabat_API\Talabat.Belal.Solution\Talabat.API\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

@@ -5,6 +5,8 @@ using Talabat.Core.Specifications;
 using Talabat.Core.Repositories.Contract;
 using Talabat.Repository.Data;
 using Talabat.Core.Specifications.Product_Specs;
+using AutoMapper;
+using Talabat.API.Dtos;
 
 namespace Talabat.API.Controllers
 {
@@ -12,27 +14,29 @@ namespace Talabat.API.Controllers
     public class ProductsController : BaseApiController
     {
         private readonly IGenericRepository<Product> _productRepo;
+        private readonly IMapper _mapper;
 
-        public ProductsController(IGenericRepository<Product> productRepo)
+        public ProductsController(IGenericRepository<Product> productRepo , IMapper mapper)
         {
             _productRepo = productRepo;
+           _mapper = mapper;
         }
 
         // /api/Products
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<ProductToReturnDTO>>> GetProducts()
         {
             //var products = await _productRepo.GetAllAsync();
             //return Ok(products); 
 
             var spec = new ProductWithBrandAndCategorySpecifications();
             var products = await _productRepo.GetAllWithSpecAsync(spec);
-            return Ok(products);
+            return Ok(_mapper.Map<IEnumerable<Product> , IEnumerable<ProductToReturnDTO>>(products));
         }
 
         // /api/Products/1
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult<ProductToReturnDTO>> GetProduct(int id)
         {
             //var product = await _productRepo.GetAsync(id);
 
@@ -58,7 +62,7 @@ namespace Talabat.API.Controllers
                     code = 404
                 });
             }
-            return Ok(product);
+            return Ok(_mapper.Map<Product,ProductToReturnDTO>(product));
         }
     }
 }
