@@ -7,6 +7,7 @@ using Talabat.Repository.Data;
 using Talabat.Core.Specifications.Product_Specs;
 using AutoMapper;
 using Talabat.API.Dtos;
+using Talabat.API.Errors;
 
 namespace Talabat.API.Controllers
 {
@@ -56,11 +57,13 @@ namespace Talabat.API.Controllers
 
             if (product == null)
             {
-                return NotFound(new
-                {
-                    message = "this product not found",
-                    code = 404
-                });
+                //return NotFound(new
+                //{
+                //    message = "this product not found",
+                //    code = 404
+                //});
+
+                return NotFound(new ApiResponse(404));
             }
             return Ok(_mapper.Map<Product,ProductToReturnDTO>(product));
         }
