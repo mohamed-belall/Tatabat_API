@@ -10,8 +10,10 @@ namespace Talabat.API.Helper
         {
             //CreateMap<Product, ProductToReturnDTO>().ReverseMap();
             CreateMap<Product, ProductToReturnDTO>()
-                .ForMember(d => d.Brand , O => O.MapFrom(s => s.Brand.Name))
-                .ForMember(d => d.Category , O => O.MapFrom(s => s.Category.Name));
+                .ForMember(d => d.Brand, O => O.MapFrom(s => s.Brand.Name))
+                .ForMember(d => d.Category, O => O.MapFrom(s => s.Category.Name))
+                .ForMember(d => d.PictureUrl, O => O.MapFrom<ProductPictureUrlResolver>());
+                //.ForMember(d => d.PictureUrl , O => O.MapFrom(p => $"{"https://localhost:7094"}/{p.PictureUrl}"))
         }
     }
 }

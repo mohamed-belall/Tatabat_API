@@ -46,6 +46,8 @@ namespace Talabat.API
             // generic 
             webApplicationBuilder.Services.AddScoped(typeof(IGenericRepository<>) , typeof(GenericRepository<>));
 
+            webApplicationBuilder.Services.AddScoped<ProductPictureUrlResolver>();
+
             #endregion
 
 
@@ -106,6 +108,8 @@ namespace Talabat.API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseStaticFiles();
 
             app.UseHttpsRedirection();
 
