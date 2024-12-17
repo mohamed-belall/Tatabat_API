@@ -35,6 +35,9 @@ namespace Talabat.API.Controllers
             return Ok(_mapper.Map<IEnumerable<Product> , IEnumerable<ProductToReturnDTO>>(products));
         }
 
+        // we just make this for improve swagger documentation
+        [ProducesResponseType(typeof(ProductToReturnDTO) , StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse) , StatusCodes.Status404NotFound)]
         // /api/Products/1
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductToReturnDTO>> GetProduct(int id)
