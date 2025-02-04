@@ -47,6 +47,9 @@ namespace Talabat.Repository
             return await _dbContext.Set<T>().ToListAsync();
         }
 
+   
+
+
         public async Task<T?> GetWithSpecAsync(ISpecifications<T> spec)
         {
             return await ApplySpecification(spec).FirstOrDefaultAsync();

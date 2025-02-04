@@ -41,5 +41,5 @@ namespace Talabat.Repository.Data.Config
                 //.WithMany(C => C.) if we have navigation property in many entity
                 .HasForeignKey(p => p.CategoryId);
         }
-    }
+    }  
 }

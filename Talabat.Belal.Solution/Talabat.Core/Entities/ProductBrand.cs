@@ -21,5 +21,5 @@ namespace Talabat.Core.Entities
         // but we use fluent api instead
         // by default [1:1]
         // we make it one to many
-    }
+    } 
 }

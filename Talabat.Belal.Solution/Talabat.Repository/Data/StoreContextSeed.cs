@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Microsoft.EntityFrameworkCore.Internal;
 using System.Text.Json;
-using System.Text.Json.Nodes;
-using System.Threading.Tasks;
 using Talabat.Core.Entities;
 
 namespace Talabat.Repository.Data
@@ -12,7 +7,7 @@ namespace Talabat.Repository.Data
     public static class StoreContextSeed
     {
 
-        public async static  Task SeedAsync( StoreContext _dbContext)
+        public async static Task SeedAsync(StoreContext _dbContext)
         {
             // 1. read file
             // 2. deserialize json file into list of Models
@@ -40,7 +35,7 @@ namespace Talabat.Repository.Data
                         _dbContext.Set<ProductBrand>().Add(brand);
                     }
                     await _dbContext.SaveChangesAsync();
-                } 
+                }
             }
 
 
@@ -79,6 +74,40 @@ namespace Talabat.Repository.Data
                     await _dbContext.SaveChangesAsync();
                 }
             }
+
+            /* ======================= seeding Department Data ======================= */
+            if(_dbContext.Departments.Count() ==0)
+            {
+                var DepartmentsData = File.ReadAllText("../Talabat.Repository/Data/DataSeed/departments_seeding.json");
+                var departments = JsonSerializer.Deserialize<List<Department>>(DepartmentsData);
+
+                if(departments?.Count() >0)
+                {
+                    foreach (var department in departments)
+                    {
+                        _dbContext.Set<Department>().Add(department);
+                    }
+                    await _dbContext.SaveChangesAsync();
+                }
+            }
+
+            /* ======================= seeding Employee Data ======================= */
+            if (_dbContext.Employees.Count() == 0)
+            {
+                var employeesData = File.ReadAllText("../Talabat.Repository/Data/DataSeed/employees_seeding.json");
+                var employees = JsonSerializer.Deserialize<List<Employee>>(employeesData);
+
+                if (employees?.Count() > 0)
+                {
+                    foreach (var employee in employees)
+                    {
+                        _dbContext.Set<Employee>().Add(employee);
+                    }
+                    await _dbContext.SaveChangesAsync();
+                }
+            }
+
+
         }
     }
 }

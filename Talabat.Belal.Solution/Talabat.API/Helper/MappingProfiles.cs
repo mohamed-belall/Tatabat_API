@@ -13,7 +13,11 @@ namespace Talabat.API.Helper
                 .ForMember(d => d.Brand, O => O.MapFrom(s => s.Brand.Name))
                 .ForMember(d => d.Category, O => O.MapFrom(s => s.Category.Name))
                 .ForMember(d => d.PictureUrl, O => O.MapFrom<ProductPictureUrlResolver>());
-                //.ForMember(d => d.PictureUrl , O => O.MapFrom(p => $"{"https://localhost:7094"}/{p.PictureUrl}"))
+            //.ForMember(d => d.PictureUrl , O => O.MapFrom(p => $"{"https://localhost:7094"}/{p.PictureUrl}"))
+
+
+            CreateMap<Employee, EmployeeToReturnDTO>()
+                .ForMember(d => d.Department, O => O.MapFrom(s => s.Department.Name));
         }
     }
 }

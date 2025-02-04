@@ -46,6 +46,10 @@ namespace Talabat.Repository.Data
         public DbSet<ProductBrand> productBrands { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
 
+        public DbSet<Department> Departments { get; set; }
+
+        public DbSet<Employee> Employees { get; set; }
+
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{

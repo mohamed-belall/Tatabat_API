@@ -1,14 +1,20 @@
 ﻿
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Writers;
 using Talabat.API.Errors;
+
+using Talabat.API.Extensions;
 using Talabat.API.Helper;
 using Talabat.API.Middlewares;
 using Talabat.Core.Entities;
+using Talabat.Core.Entities.Identity;
 using Talabat.Core.Repositories.Contract;
 using Talabat.Repository;
 using Talabat.Repository.Data;
+using Talabat.Repository.Identity;
 
 namespace Talabat.API
 {
@@ -29,9 +35,10 @@ namespace Talabat.API
             // Add services to the container.
 
             webApplicationBuilder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            webApplicationBuilder.Services.AddEndpointsApiExplorer();
-            webApplicationBuilder.Services.AddSwaggerGen();
+
+
+            // clean up program use extension method
+            webApplicationBuilder.Services.AddSwaggerServices();
 
 
             webApplicationBuilder.Services.AddDbContext<StoreContext>(options =>
@@ -39,68 +46,40 @@ namespace Talabat.API
                 options.UseSqlServer(webApplicationBuilder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
-
-
-            #region allow_dependancyInjection_for_repository
-            //webApplicationBuilder.Services.AddScoped<IGenericRepository<Product>, GenericRepository<Product>>();
-            //webApplicationBuilder.Services.AddScoped<IGenericRepository<ProductCategory>, GenericRepository<ProductCategory>>();
-            //webApplicationBuilder.Services.AddScoped<IGenericRepository<ProductBrand>, GenericRepository<ProductBrand>>(); 
-
-            // generic 
-            webApplicationBuilder.Services.AddScoped(typeof(IGenericRepository<>) , typeof(GenericRepository<>));
-
-            webApplicationBuilder.Services.AddScoped<ProductPictureUrlResolver>();
-
-            #endregion
-
-
-            webApplicationBuilder.Services.AddAutoMapper(M => M.AddProfile(new MappingProfiles()));
-
-            //webApplicationBuilder.Services.AddAutoMapper(typeof(MappingProfiles));
-
-
-
-
-
-
-            webApplicationBuilder.Services.Configure<ApiBehaviorOptions>(options =>
+            webApplicationBuilder.Services.AddDbContext<AppIdentityDbContext>(optionBuilder =>
             {
-                // factory المسوال عن ال response بتاع ال end point اللي بتتنفذ حاليا 
-                options.InvalidModelStateResponseFactory = (actionContext) =>
-                {
-                    // modelState => is a dictionary or each value pair for each parameter
-                    // key => parameter name
-                    // value => list of errors
-
-                    var errors = actionContext
-                    .ModelState
-                    .Where(p => p.Value.Errors.Count() > 0)
-                    .SelectMany(p => p.Value.Errors)
-                    .Select(E => E.ErrorMessage)
-                    .ToArray();
-
-                    var validationErrorResponse = new ApiValidationErrorResponse()
-                    {
-                        Errors = errors
-                    };
-
-                    return new BadRequestObjectResult(validationErrorResponse);
-
-                };
+                optionBuilder.UseSqlServer(webApplicationBuilder.Configuration.GetConnectionString("IdentityConnection"));
             });
+
+            // clean up program use extension method
+            webApplicationBuilder.Services.AddApplicationServices();
+
+            // add Identity Services configuration (UserManager , SigninManager , RoleManager)
+            webApplicationBuilder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+            {
+                //options.Password.RequiredUniqueChars = 2;
+                //options.Password.RequireNonAlphanumeric = true;
+                //options.Password.RequireUppercase = true;
+                //options.Password.RequireLowercase = true;
+
+            }).AddEntityFrameworkStores<AppIdentityDbContext>(); 
+
             #endregion
 
 
-            var app = webApplicationBuilder.Build();
+             var app = webApplicationBuilder.Build();
+
 
 
             #region Ask CLR for creating Object from DbContext Explicitly
             // ask CLR for creating Object from DbContext Explicitly
 
             using var scope = app.Services.CreateScope();
-          
+
             var services = scope.ServiceProvider;
             var _dbContext = services.GetRequiredService<StoreContext>();
+
+            var _identityDbContext = services.GetRequiredService<AppIdentityDbContext>();
 
             var loggerFactory = services.GetRequiredService<ILoggerFactory>();
             try
@@ -109,12 +88,17 @@ namespace Talabat.API
                 await _dbContext.Database.MigrateAsync(); // for automatically update database
 
                 await StoreContextSeed.SeedAsync(_dbContext); // for seeding entered data
+
+                await _identityDbContext.Database.MigrateAsync(); // for automatically update database
+
+                var _userManager = services.GetRequiredService<UserManager<AppUser>>(); // Explicitly
+                await AppIdentityDbContextSeed.identitySeedAsync(_userManager);
             }
             catch (Exception ex)
             {
                 var logger = loggerFactory.CreateLogger<Program>();
                 logger.LogError(ex, "an error has been occurred during apply the Migration");
-                
+
             }
 
 
@@ -122,7 +106,7 @@ namespace Talabat.API
             // this is another way to dispose scope or using ( using ) 
             //var scope = app.Services.CreateScope();
             //try
-            //{
+            //{ 
 
             //    var services = scope.ServiceProvider;
             //    var _dbContext = services.GetRequiredService<DbContext>();
@@ -131,6 +115,9 @@ namespace Talabat.API
 
             //}
             //finally { scope.Dispose(); }
+
+
+
 
             #endregion
 
@@ -142,8 +129,8 @@ namespace Talabat.API
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                // clean up program use extension method
+                app.UseSwaggerMiddleware();
             }
 
 

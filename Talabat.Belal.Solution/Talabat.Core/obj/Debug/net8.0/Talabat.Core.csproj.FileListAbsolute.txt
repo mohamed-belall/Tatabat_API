@@ -22,3 +22,4 @@ D:\01_DotNET\Route\Tatabat_API\Talabat.Belal.Solution\Talabat.Core\obj\Debug\net
 D:\01_DotNET\Route\Tatabat_API\Talabat.Belal.Solution\Talabat.Core\obj\Debug\net8.0\refint\Talabat.Core.dll
 D:\01_DotNET\Route\Tatabat_API\Talabat.Belal.Solution\Talabat.Core\obj\Debug\net8.0\Talabat.Core.pdb
 D:\01_DotNET\Route\Tatabat_API\Talabat.Belal.Solution\Talabat.Core\obj\Debug\net8.0\ref\Talabat.Core.dll
+D:\01_DotNET\Route\Tatabat_API\Talabat.Belal.Solution\Talabat.Core\obj\Debug\net8.0\Talabat.Core.csproj.AssemblyReference.cache
