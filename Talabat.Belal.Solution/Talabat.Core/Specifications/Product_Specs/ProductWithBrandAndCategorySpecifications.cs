@@ -12,11 +12,37 @@ namespace Talabat.Core.Specifications.Product_Specs
     {
         // this constructor will be used for creating an object 
         // that will be used to get all products
-        public ProductWithBrandAndCategorySpecifications() : base()
+        public ProductWithBrandAndCategorySpecifications(string? sort, int? brandId, int? categoryId) : base( p =>
+            (!brandId.HasValue || p.BrandId == brandId.Value) &&
+            (!categoryId.HasValue || p.CategoryId == categoryId.Value)
+            )
         {
             //AddIncludes();
             Includes.Add(p => p.Brand);
             Includes.Add(p => p.Category);
+
+            // add sorting crieria
+           if(!string.IsNullOrEmpty(sort))
+            {
+                switch (sort)
+                {
+                    case "PriceAsc":
+                        //OrderBy = P => P.Price;
+                        AddOrderBy(p => p.Price);
+                        break;
+                    case "PriceDesc":
+                        //OrderByDesc = P => P.Price;
+                        AddOrderByDesc(p => p.Price);
+                        break;
+                    default:
+                        AddOrderBy(p => p.Name);
+                        break;
+                }
+            }else
+            {
+                AddOrderBy(p => p.Name);
+            }
+
         }
 
         // this constructor will be used for creating an object 

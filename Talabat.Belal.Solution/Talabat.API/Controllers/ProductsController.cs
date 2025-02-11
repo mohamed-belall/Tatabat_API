@@ -8,6 +8,7 @@ using Talabat.Core.Specifications.Product_Specs;
 using AutoMapper;
 using Talabat.API.Dtos;
 using Talabat.API.Errors;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Talabat.API.Controllers
 {
@@ -15,25 +16,37 @@ namespace Talabat.API.Controllers
     public class ProductsController : BaseApiController
     {
         private readonly IGenericRepository<Product> _productRepo;
+        private readonly IGenericRepository<ProductBrand> _brandRepo;
+        private readonly IGenericRepository<ProductCategory> _categoryRepo;
         private readonly IMapper _mapper;
 
-        public ProductsController(IGenericRepository<Product> productRepo , IMapper mapper)
+        public ProductsController(
+            IGenericRepository<Product> productRepo ,
+            IGenericRepository<ProductBrand> brandRepo,
+            IGenericRepository<ProductCategory> categoryRepo,
+            IMapper mapper)
         {
             _productRepo = productRepo;
-           _mapper = mapper;
+            this._brandRepo = brandRepo;
+            this._categoryRepo = categoryRepo;
+            _mapper = mapper;
         }
 
         // /api/Products
+        //[Authorize]
         [HttpGet] 
-        public async Task<ActionResult<IEnumerable<ProductToReturnDTO>>> GetProducts()
+        public async Task<ActionResult<IReadOnlyList<ProductToReturnDTO>>> GetProducts(string? sort , int? brandId , int? categoryId)
         {
             //var products = await _productRepo.GetAllAsync();
             //return Ok(products); 
 
-            var spec = new ProductWithBrandAndCategorySpecifications();
+            var spec = new ProductWithBrandAndCategorySpecifications(sort= sort ,brandId =  brandId ,categoryId = categoryId);
             var products = await _productRepo.GetAllWithSpecAsync(spec);
-            return Ok(_mapper.Map<IEnumerable<Product> , IEnumerable<ProductToReturnDTO>>(products));
+            return Ok(_mapper.Map<IReadOnlyList<Product> , IReadOnlyList<ProductToReturnDTO>>(products));
         }
+
+
+
 
         // we just make this for improve swagger documentation
         [ProducesResponseType(typeof(ProductToReturnDTO) , StatusCodes.Status200OK)]
@@ -69,6 +82,31 @@ namespace Talabat.API.Controllers
                 return NotFound(new ApiResponse(404));
             }
             return Ok(_mapper.Map<Product,ProductToReturnDTO>(product));
+        }
+
+
+
+
+
+        [HttpGet("Brands")] // GET: api/Product/Brands
+        public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetAllBrands()
+        {
+
+            var brands =  await _brandRepo.GetAllAsync();
+
+            return Ok(brands);
+
+        }
+
+
+        [HttpGet("Categories")] // GET: api/Product/Categories
+        public async Task<ActionResult<IReadOnlyList<ProductCategory>>> GetAllCategories()
+        {
+
+            var categories = await _categoryRepo.GetAllAsync();
+
+            return Ok(categories);
+
         }
     }
 }

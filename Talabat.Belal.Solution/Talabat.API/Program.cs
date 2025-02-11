@@ -12,9 +12,11 @@ using Talabat.API.Middlewares;
 using Talabat.Core.Entities;
 using Talabat.Core.Entities.Identity;
 using Talabat.Core.Repositories.Contract;
+using Talabat.Core.Services.Contract;
 using Talabat.Repository;
 using Talabat.Repository.Data;
 using Talabat.Repository.Identity;
+using Talabat.Service;
 
 namespace Talabat.API
 {
@@ -54,20 +56,27 @@ namespace Talabat.API
             // clean up program use extension method
             webApplicationBuilder.Services.AddApplicationServices();
 
-            // add Identity Services configuration (UserManager , SigninManager , RoleManager)
-            webApplicationBuilder.Services.AddIdentity<AppUser, IdentityRole>(options =>
-            {
-                //options.Password.RequiredUniqueChars = 2;
-                //options.Password.RequireNonAlphanumeric = true;
-                //options.Password.RequireUppercase = true;
-                //options.Password.RequireLowercase = true;
 
-            }).AddEntityFrameworkStores<AppIdentityDbContext>(); 
+
+            // clean up program use extension method
+            webApplicationBuilder.Services.AddIdentityServices(webApplicationBuilder.Configuration);
+
+            //webApplicationBuilder.Services.AddScoped(typeof(IAuthService), typeof(AuthServices));
+
+            //// add Identity Services configuration (UserManager , SigninManager , RoleManager)
+            //webApplicationBuilder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+            //{
+            //    //options.Password.RequiredUniqueChars = 2;
+            //    //options.Password.RequireNonAlphanumeric = true;
+            //    //options.Password.RequireUppercase = true;
+            //    //options.Password.RequireLowercase = true;
+
+            //}).AddEntityFrameworkStores<AppIdentityDbContext>();
 
             #endregion
 
 
-             var app = webApplicationBuilder.Build();
+            var app = webApplicationBuilder.Build();
 
 
 
@@ -137,15 +146,15 @@ namespace Talabat.API
             //app.UseStatusCodePagesWithRedirects("/Errors/{0}");
             app.UseStatusCodePagesWithReExecute("/Errors/{0}");
 
-            app.UseStaticFiles();
-
             app.UseHttpsRedirection();
-
-            app.UseAuthorization();
+            app.UseStaticFiles();
 
 
             app.MapControllers();
 
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             #endregion
 
