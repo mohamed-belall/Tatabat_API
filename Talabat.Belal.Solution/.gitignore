@@ -4,3 +4,10 @@
 # Ignore build output directories
 Talabat.API/bin/
 Talabat.API/obj/
+
+TalabatTalabat.Core/bin/
+TalabatTalabat.Core/obj/
+TalabatTalabat.Repository/bin/
+TalabatTalabat.Repository/obj/
+TalabatTalabat.Service/bin/
+TalabatTalabat.Service/obj/
