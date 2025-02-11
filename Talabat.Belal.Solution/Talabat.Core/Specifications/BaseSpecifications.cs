@@ -29,8 +29,20 @@ namespace Talabat.Core.Specifications
         public Expression<Func<T, bool>> Criteria { get; set; } = null;
         public List<Expression<Func<T, object>>> Includes { get; set; }
 
+
+        #region order
         public Expression<Func<T, object>> OrderBy { get; set; } = null;
         public Expression<Func<T, object>> OrderByDesc { get; set; } = null;
+        #endregion
+
+
+
+        #region paginations
+        // paginations
+        public bool IsPaginationsEnabled { get; set; }
+        public int Skip { get; set; }
+        public int Take { get; set; }
+        #endregion
 
 
 
@@ -48,11 +60,11 @@ namespace Talabat.Core.Specifications
         // 2. when use where expression
         public BaseSpecifications(Expression<Func<T, bool>> criteriaExpression)
         {
-            Criteria = criteriaExpression; // P => P.Id == 10
+            Criteria = criteriaExpression; // PP.Id == 10
             Includes = new List<Expression<Func<T, object>>>();
         }
 
-
+        #region sorting
 
         public void AddOrderBy(Expression<Func<T, object>> OrderByExpression)
         {
@@ -62,6 +74,18 @@ namespace Talabat.Core.Specifications
         public void AddOrderByDesc(Expression<Func<T, object>> OrderByDescExpression)
         {
             OrderByDesc = OrderByDescExpression;
-        }   
+        }
+        #endregion
+
+
+
+        #region paginations
+        public void ApplyPagination(int skip , int take )
+        {
+            IsPaginationsEnabled = true;
+            Skip = skip;
+            Take = take;
+        }
+        #endregion
     }
 }

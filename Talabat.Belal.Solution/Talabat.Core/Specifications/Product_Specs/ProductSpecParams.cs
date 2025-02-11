@@ -8,6 +8,21 @@ namespace Talabat.Core.Specifications.Product_Specs
 {
     public class ProductSpecParams
     {
+        private const int maxPageSize = 10;
+        // we want to make validation on this prop so we use prop full
+        //public int PageSize { get; set; }
+
+        // using prop full
+        private int pageSize = 5;
+        public int PageSize
+        {
+            get { return pageSize; }
+            set { pageSize = value > maxPageSize ? maxPageSize : value; }
+        }
+
+        public int PageIndex { get; set; } = 1;
+
+
         public string? Sort { get; set; }
         public int? BrandId { get; set; }
         public int? CategoryId { get; set; }
