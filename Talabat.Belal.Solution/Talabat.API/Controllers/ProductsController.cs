@@ -9,6 +9,7 @@ using AutoMapper;
 using Talabat.API.Dtos;
 using Talabat.API.Errors;
 using Microsoft.AspNetCore.Authorization;
+using Talabat.API.Helper;
 
 namespace Talabat.API.Controllers
 {
@@ -42,7 +43,14 @@ namespace Talabat.API.Controllers
 
             var spec = new ProductWithBrandAndCategorySpecifications(specParams);
             var products = await _productRepo.GetAllWithSpecAsync(spec);
-            return Ok(_mapper.Map<IReadOnlyList<Product> , IReadOnlyList<ProductToReturnDTO>>(products));
+
+
+            var countSpec = new ProductWithFiltrationForCountSpecification(specParams);
+
+            var count = await _productRepo.GetCountAsync(countSpec);
+
+            var result = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDTO>>(products);
+            return Ok(new Pagination<ProductToReturnDTO>(pageIndex: specParams.PageIndex , pageSize: specParams.PageSize , data: result, count: count));
         }
 
 
