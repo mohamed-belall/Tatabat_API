@@ -13,9 +13,10 @@ namespace Talabat.Core.Specifications.Product_Specs
     {
         // this constructor will be used for creating an object 
         // that will be used to get all products
-        public ProductWithBrandAndCategorySpecifications(ProductSpecParams specParams) : base( 
-        # region filter
+        public ProductWithBrandAndCategorySpecifications(ProductSpecParams specParams) : base(
+        #region filter
         p =>
+        (string.IsNullOrEmpty(specParams.Search) || p.Name.ToLower().Contains(specParams.Search)) &&
             (!specParams.BrandId.HasValue || p.BrandId == specParams.BrandId.Value) &&
             (!specParams.CategoryId.HasValue || p.CategoryId == specParams.CategoryId.Value)
         #endregion
