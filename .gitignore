@@ -1,0 +1,13 @@
+# Ignore Visual Studio files
+Talabat.Belal.Solution/.vs/
+
+# Ignore build output directories
+Talabat.Belal.Solution/Talabat.API/bin/
+Talabat.Belal.Solution/Talabat.API/obj/
+
+Talabat.Belal.Solution/TalabatTalabat.Core/bin/
+Talabat.Belal.Solution/TalabatTalabat.Core/obj/
+Talabat.Belal.Solution/TalabatTalabat.Repository/bin/
+Talabat.Belal.Solution/TalabatTalabat.Repository/obj/
+Talabat.Belal.Solution/TalabatTalabat.Service/bin/
+Talabat.Belal.Solution/TalabatTalabat.Service/obj/
