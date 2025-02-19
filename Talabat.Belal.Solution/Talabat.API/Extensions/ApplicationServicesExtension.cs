@@ -12,7 +12,11 @@ namespace Talabat.API.Extensions
 
         public static IServiceCollection AddApplicationServices(this IServiceCollection services )
         {
+
+
             #region allow_dependancyInjection_for_repository
+
+            services.AddScoped(typeof(IBasketRepository), typeof(BasketRepository));
             //services.AddScoped<IGenericRepository<Product>, GenericRepository<Product>>();
             //services.AddScoped<IGenericRepository<ProductCategory>, GenericRepository<ProductCategory>>();
             //services.AddScoped<IGenericRepository<ProductBrand>, GenericRepository<ProductBrand>>(); 
