@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Talabat.API.Dtos;
+using Talabat.API.Dtos.Redis;
 using Talabat.Core.Entities;
 
 namespace Talabat.API.Helper
@@ -18,6 +19,10 @@ namespace Talabat.API.Helper
 
             CreateMap<Employee, EmployeeToReturnDTO>()
                 .ForMember(d => d.Department, O => O.MapFrom(s => s.Department.Name));
+
+
+            CreateMap<CustomerBasketDTO, CustomerBasket>();
+            CreateMap<BasketItemDTO, BasketItem>();
         }
     }
 }
