@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Internal;
 using System.Text.Json;
 using Talabat.Core.Entities;
+using Talabat.Core.Entities.Order_Aggregate;
 
 namespace Talabat.Repository.Data
 {
@@ -102,6 +103,26 @@ namespace Talabat.Repository.Data
                     foreach (var employee in employees)
                     {
                         _dbContext.Set<Employee>().Add(employee);
+                    }
+                    await _dbContext.SaveChangesAsync();
+                }
+            }
+
+
+
+            /* ======================= seeding delivery Methods Data ======================= */
+            if (_dbContext.DeliveryMethods.Count() == 0)
+            {
+                var deliveryMethodsData = File.ReadAllText("../Talabat.Repository/Data/DataSeed/delivery.json");
+                var deliveryMethods = JsonSerializer.Deserialize<List<DeliveryMethod>>(deliveryMethodsData);
+
+                if (deliveryMethods?.Count() > 0)
+                {
+                    // we have a problem we want to add id column in adding to database
+                    // we use data projection or delete id from json file
+                    foreach (var deliveryMethod in deliveryMethods)
+                    {
+                        _dbContext.Set<DeliveryMethod>().Add(deliveryMethod);
                     }
                     await _dbContext.SaveChangesAsync();
                 }

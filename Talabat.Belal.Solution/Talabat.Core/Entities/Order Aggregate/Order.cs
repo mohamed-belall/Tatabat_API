@@ -11,10 +11,10 @@ namespace Talabat.Core.Entities.Order_Aggregate
     {
         // here,  Accessible Empty Parameterless Constructor must be Exist
         // we create parameterless constructor for EF Core  to make migration
-        //public Order()
-        //{
+        public Order()
+        {
 
-        //}
+        }
 
         public Order(string buyerEmail, Address shippingAddress, decimal subTotal, int deliveryMethodId, DeliveryMethod deliveryMethod, ICollection<OrderItem> items)
         {
@@ -48,7 +48,7 @@ namespace Talabat.Core.Entities.Order_Aggregate
 
         // another way
         public decimal GetTotal()
-            => SubTotal + DeliveryMethod.Coast;
+            => SubTotal + DeliveryMethod.Cost;
         #endregion
 
         public string PaymentIntentId { get; set; } = string.Empty;

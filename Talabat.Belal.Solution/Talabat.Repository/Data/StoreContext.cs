@@ -8,9 +8,12 @@ using Talabat.Core.Entities;
 using Talabat.Repository.Data.Config;
 
 
+// Add-Migration "OrderModules" -Context StoreContext -Output /Data/Migrations
+
 
 // to use this modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());  
 using System.Reflection;
+using Talabat.Core.Entities.Order_Aggregate;
 
 namespace Talabat.Repository.Data
 {
@@ -49,6 +52,13 @@ namespace Talabat.Repository.Data
         public DbSet<Department> Departments { get; set; }
 
         public DbSet<Employee> Employees { get; set; }
+
+
+
+
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
 
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

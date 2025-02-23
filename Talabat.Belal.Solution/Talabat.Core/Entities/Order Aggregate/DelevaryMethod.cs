@@ -13,18 +13,18 @@ namespace Talabat.Core.Entities.Order_Aggregate
         {
             
         }
-        public DeliveryMethod(string shortName, string description, decimal coast, string delivaryDate)
+        public DeliveryMethod(string shortName, string description, decimal coast, string deliveryTime)
         {
             ShortName = shortName;
             Description = description;
-            Coast = coast;
-            DelivaryDate = delivaryDate;
+            Cost = coast;
+            DeliveryTime = deliveryTime;
         }
 
         public string ShortName { get; set; }
         public string Description { get; set; }
-        public decimal Coast { get; set; }
-        public string DelivaryDate { get; set; }
+        public decimal Cost { get; set; }
+        public string DeliveryTime { get; set; }
 
 
     }
