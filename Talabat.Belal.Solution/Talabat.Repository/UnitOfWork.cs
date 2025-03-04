@@ -53,15 +53,11 @@ namespace Talabat.Repository
             #endregion
         }
 
-        public Task<int> CompleteAsync()
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<int> CompleteAsync()
+            => await _storeContext.SaveChangesAsync();
 
-        public ValueTask DisposeAsync()
-        {
-            throw new NotImplementedException();
-        }
+        public async ValueTask DisposeAsync()
+            => await _storeContext.DisposeAsync();
 
 
 

@@ -4,7 +4,9 @@ using Talabat.API.Errors;
 using Talabat.API.Helper;
 using Talabat.Core;
 using Talabat.Core.Repositories.Contract;
+using Talabat.Core.Services.Contract;
 using Talabat.Repository;
+using Talabat.Service;
 
 namespace Talabat.API.Extensions
 {
@@ -26,6 +28,8 @@ namespace Talabat.API.Extensions
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
+
+            services.AddScoped(typeof(IOrderService), typeof(OrderService));
 
             services.AddScoped<ProductPictureUrlResolver>();
 

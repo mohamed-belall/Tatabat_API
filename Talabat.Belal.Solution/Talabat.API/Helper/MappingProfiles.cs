@@ -2,6 +2,7 @@
 using Talabat.API.Dtos;
 using Talabat.API.Dtos.Redis;
 using Talabat.Core.Entities;
+using Talabat.Core.Entities.Order_Aggregate;
 
 namespace Talabat.API.Helper
 {
@@ -23,6 +24,8 @@ namespace Talabat.API.Helper
 
             CreateMap<CustomerBasketDTO, CustomerBasket>();
             CreateMap<BasketItemDTO, BasketItem>();
+
+            CreateMap<AddressDTO, Address>();
         }
     }
 }
