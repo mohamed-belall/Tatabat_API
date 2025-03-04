@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Talabat.API.Errors;
 using Talabat.API.Helper;
+using Talabat.Core;
 using Talabat.Core.Repositories.Contract;
 using Talabat.Repository;
 
@@ -23,6 +24,8 @@ namespace Talabat.API.Extensions
 
             // generic 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+            services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
 
             services.AddScoped<ProductPictureUrlResolver>();
 
