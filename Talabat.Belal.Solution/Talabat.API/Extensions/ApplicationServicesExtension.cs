@@ -32,6 +32,7 @@ namespace Talabat.API.Extensions
             services.AddScoped(typeof(IOrderService), typeof(OrderService));
 
             services.AddScoped<ProductPictureUrlResolver>();
+            services.AddScoped<OrderItemPictureUrlResolver>();
 
             #endregion
 
