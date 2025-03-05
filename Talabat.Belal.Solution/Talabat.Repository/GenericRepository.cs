@@ -20,7 +20,7 @@ namespace Talabat.Repository
            _dbContext = dbContext;
         }
 
-        public async Task<T?> GetAsync(int id)
+        public async Task<T?> GetByIdAsync(int id)
         {
             
             //if(typeof(T) == typeof(Product))
@@ -50,7 +50,7 @@ namespace Talabat.Repository
    
 
 
-        public async Task<T?> GetWithSpecAsync(ISpecifications<T> spec)
+        public async Task<T?> GetByIdWithSpecAsync(ISpecifications<T> spec)
         {
             return await ApplySpecification(spec).FirstOrDefaultAsync();
         }

@@ -49,7 +49,7 @@ namespace Talabat.Service
                 foreach (var item in basket.Items)
                 {
                     //var product = await _productRepo.GetAsync(item.Id);
-                    var product = await productRepository.GetAsync(item.Id);
+                    var product = await productRepository.GetByIdAsync(item.Id);
 
                     var prodcutItemOrder = new ProductItemOrdered(item.Id, product.Name, product.PictureUrl);
 
@@ -66,7 +66,7 @@ namespace Talabat.Service
 
             // 4. Get delivaryMethod from delivaryMethod repo
             //var delivaryMethod = await _delivaryMethodRepo.GetAsync(delivaryMethodId);
-            var delivaryMethod = await _unitOfWork.Repository<DeliveryMethod>().GetAsync(delivaryMethodId);
+            var delivaryMethod = await _unitOfWork.Repository<DeliveryMethod>().GetByIdAsync(delivaryMethodId);
 
             // 5. create order
             var order = new Order(buyerEmail, shippingAddress, subtotal, delivaryMethodId, delivaryMethod, orderItems);
@@ -91,9 +91,16 @@ namespace Talabat.Service
             return orders;
         }
 
-        public Task<Order> GetOrderByIdForUser(int orderId, string buyerEmail)
+        public async Task<Order?> GetOrderByIdForUserAsync(int orderId, string buyerEmail)
         {
-            throw new NotImplementedException();
+            var orderRepo = _unitOfWork.Repository<Order>();
+
+
+            var spec = new OrderSpecifications(orderId , buyerEmail);
+
+            var order =  await orderRepo.GetByIdWithSpecAsync(spec);
+
+            return order;
         }
 
      

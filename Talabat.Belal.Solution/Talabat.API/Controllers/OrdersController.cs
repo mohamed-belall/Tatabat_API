@@ -55,5 +55,18 @@ namespace Talabat.API.Controllers
                 return BadRequest(new ApiResponse(400));
             return Ok(orders);
         }
+
+
+        [ProducesResponseType(typeof(Order) , StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse) , StatusCodes.Status404NotFound)]
+        [HttpGet("{id}")] // GET: /api/orders/1?email=mohamedbelal.eng@gmail.com
+        public async Task<ActionResult<Order>> GetOrderByIdForUser(int id , string email)
+        {
+            var order =await _orderService.GetOrderByIdForUserAsync(id  , email);
+
+            if (order is null) return NotFound(new ApiResponse(404));
+
+            return Ok(order);
+        }
     }
 }
