@@ -3,7 +3,8 @@ using Talabat.API.Dtos;
 using Talabat.API.Dtos.Redis;
 using Talabat.Core.Entities;
 using Talabat.Core.Entities.Order_Aggregate;
-
+using OrderAddress = Talabat.Core.Entities.Order_Aggregate.Address;
+using UserAddress = Talabat.Core.Entities.Identity.Address;
 namespace Talabat.API.Helper
 {
     public class MappingProfiles : Profile
@@ -25,7 +26,10 @@ namespace Talabat.API.Helper
             CreateMap<CustomerBasketDTO, CustomerBasket>();
             CreateMap<BasketItemDTO, BasketItem>();
 
-            CreateMap<AddressDTO, Address>();
+            CreateMap<AddressDTO, OrderAddress>();
+            CreateMap<UserAddress, AddressDTO>();
+
+
 
 
             CreateMap<Order, OrderToReturnDTO>()
