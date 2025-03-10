@@ -36,11 +36,11 @@ namespace Talabat.Core.Specifications.Product_Specs
             {
                 switch (specParams.Sort)
                 {
-                    case "PriceAsc":
+                    case "priceAsc":
                         //OrderBy = P => P.Price;
                         AddOrderBy(p => p.Price);
                         break;
-                    case "PriceDesc":
+                    case "priceDesc":
                         //OrderByDesc = P => P.Price;
                         AddOrderByDesc(p => p.Price);
                         break;
