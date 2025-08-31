@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.WebSockets;
 using System.Security.Claims;
 using Talabat.API.Dtos;
 using Talabat.API.Dtos.Account;
@@ -66,6 +67,16 @@ namespace Talabat.API.Controllers
         [HttpPost("register")] // post: api/account/register
         public async Task<ActionResult<UserDTO>> Register(RegisterDTO model)
         {
+
+            if (CheckEmailExist(model.Email).Result.Value)
+                return BadRequest(new ApiValidationErrorResponse()
+                {
+                    Errors = new string[]
+                {
+                    "this Email is Already exist"
+                }
+                });
+
             var user = new AppUser()
             {
                 DisplayName = model.DisplayName,
@@ -116,6 +127,38 @@ namespace Talabat.API.Controllers
             
             
             return Ok(_mapper.Map<Address , AddressDTO>(user.Address));
+        }
+
+
+        [Authorize]
+        [HttpPut("address")]
+        public async Task<ActionResult<AddressDTO>> UpdateUserAddress(AddressDTO updatedAddress)
+        {
+          
+            var address = _mapper.Map<AddressDTO, Address>(updatedAddress);
+
+
+            var user = await _userManager.FindUserAddressByEmailAsync(User);
+
+
+            address.Id = user.Address.Id;
+
+            user.Address = address;
+
+            var result =  await _userManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+                return BadRequest(new ApiResponse(400));
+
+            return Ok(updatedAddress);
+
+        }
+
+
+        [HttpGet("emailexists")]
+        public async Task<ActionResult<bool>> CheckEmailExist(string email)
+        {
+            return await _userManager.FindByEmailAsync(email) is not null ;
         }
 
 

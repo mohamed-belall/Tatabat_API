@@ -43,6 +43,11 @@ namespace Talabat.API.Controllers
 
             var emps = await _empRepo.GetAllWithSpecAsync(spec);
 
+            //var newEmps = new Employee();
+
+            //_empRepo.AddAsync(newEmps);
+
+
             if (emps is null || emps.Count() == 0)
                 return NotFound("there is no employees");
 
